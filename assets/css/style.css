@@ -31,7 +31,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Nunito", sans-serif;
 }
 main{
-  margin: 50px;
+  margin-top: 100px;
 }
 
 /*--------------------------------------------------------------
@@ -204,6 +204,16 @@ section {
 /**
 * Desktop Navigation 
 */
+
+
+.bunner {
+  padding: 0px;
+  overflow-x: auto;
+
+}
+
+
+
 .navbar {
   padding: 0;
 }
