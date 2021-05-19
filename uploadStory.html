@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameScore</title>
+  <meta content="" name="description">
+
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/logo.png" rel="icon">
+  <link href="assets/img/logo.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+
+   <!-- ======= Header ======= -->
+   <header id="header" class="header fixed-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center">
+        <img src="assets/img/logo.png" alt="">
+      </a>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+         
+          <li><a class="nav-link scrollto" href="#contact">Register</a></li>
+          <li><a class="nav-link scrollto" href="#contact">Log In</a></li>
+          <li><a class="getstarted scrollto" href="#about">LogOut</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+
+
+
+
+  </header><!-- End Header -->
+
+  
+
+
+
+<body>
+
+    <main>
+
+        <section class="Upload">
+            <div class="container ">
+                <h2>Upload Story</h2>
+                <form  method="post" class="col-md-10 text-center">
+                    <div class="form-group">
+                        <img id="myimg"><label id="upProgress"></label>
+                    </div>
+                    <br>
+                  <br>
+                  <div class="form-group">
+                    <label  >Choose Image</label>
+                    <button  id="select" >Choose image</button>
+                  </div>
+                  
+                  <br>
+                  <div class="form-group">
+                    <label for="email">Tittle:</label><br>
+                    <input type="text" class="form-control" id="title" placeholder="Title" name="email">
+                  </div>
+                  <br>
+                  <div class="form-group">
+                    <label for="pwd">Story:</label>
+                    <br>
+                    <textarea class="form-control"  placeholder="Write a story...." rows="16" id="story"></textarea>
+                  </div>
+                  <br>
+                  <div class="form-group">
+                    <label for="category">Select Category:</label>
+                        <select class="form-control" id="category">
+                            <option>Football</option>
+                            <option>Rugby</option>
+                            <option>Hockey</option>
+                            <option>Cricket</option>
+                            <option>Basket ball</option>
+                            <option>Tennis</option>
+                        </select>
+                  </div>
+                  <br>
+                  <!-- <div class="form-group form-check">
+                    <label class="form-check-label">
+                      <input class="form-check-input" type="checkbox" name="remember"> Remember me
+                    </label>
+                  </div> -->
+                    <button  id="Upload" class="btnSubmit">Publish</button>
+                  <br>
+                </form>
+              </div>
+            
+
+
+
+        </section>
+
+
+         
+
+
+        
+    </main>
+    
+
+
+    
+
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+
+    <div class="footer-newsletter">
+      <div class="container">
+        
+      </div>
+    </div>
+
+    <div class="footer-top">
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-lg-5 col-md-12 footer-info">
+            <a href="index.html" class="logo d-flex align-items-center">
+              <img src="assets/img/logo.png" alt="">
+          
+            </a>
+            <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p>
+            <div class="social-links mt-3">
+              <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+              <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+              <a href="#" class="instagram"><i class="bi bi-instagram bx bxl-instagram"></i></a>
+              <a href="#" class="linkedin"><i class="bi bi-linkedin bx bxl-linkedin"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+            <h4>Contact Us</h4>
+            <p>
+              A108 Adam Street <br>
+              Nairobi, Nrb 00100<br>
+              Kenya <br><br>
+              <strong>Phone:</strong> +1 5589 55488 55<br>
+              <strong>Email:</strong> GameScore@example.com<br>
+            </p>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>GameScore</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/flexstart-bootstrap-startup-template/ -->
+        Designed by <a href="uploadStory.html">Elmasha Omondi</a>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+
+<!-- Vendor JS Files -->
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+<script src="assets/vendor/aos/aos.js"></script>
+<script src="assets/vendor/php-email-form/validate.js"></script>
+<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="assets/vendor/purecounter/purecounter.js"></script>
+<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+
+<!-- Template Main JS File -->
+<script src="assets/js/main.js"></script>    
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/ui/8.2.3/firebase-ui-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-storage.js"></script>
+  
+  
+  
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyAbf2dO7l3mZw5LPc0hgBkii1EmT3fDsXY",
+      authDomain: "gamescore-67bf3.firebaseapp.com",
+      projectId: "gamescore-67bf3",
+      storageBucket: "gamescore-67bf3.appspot.com",
+      messagingSenderId: "92233940710",
+      appId: "1:92233940710:web:91367a0f7bf4e07d400527"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
+
+
+<script id="MainScript">
+
+     ///-------------------VARIABLES---------------------/////
+     var Title,ImageUrl,Story,Category;
+     var files = [];
+     var reader;
+   
+   
+   ///-------------------SELECT IMAGE---------------------/////
+       document.getElementById("select").onclick = function(e){
+   
+         var input = document.createElement('input');
+         input.type = 'file';
+   
+         
+   
+         input.onchange = e =>{
+   
+           files = e.target.files;
+           reader = new FileReader();
+           reader.onload = function(){
+   
+             document.getElementById("myimg").src = reader.result;
+             
+           }
+           reader.readAsDataURL(files[0]);
+   
+         }
+         input.click();
+       }
+
+
+
+
+            ///-------------------UPLOAD IMAGE---------------------///
+  
+      document.getElementById("Upload").onclick = function(){
+  
+        Title = document.getElementById("title").value;
+        Story = document.getElementById("story").value;
+        Category = document.getElementById("category").value;
+      
+
+
+  
+        var uploadTask = firebase.storage().ref('Images/'+ImageTitle+".jpg").put(files[0]);
+  
+        uploadTask.on('state_changed',function(snapshots){
+  
+            var progress = (snapshots.bytesTransfer/ snapshots.totalBytes)*100;
+            document.getElementById('upProgress').innerHTML = 'Uploading..'+progress+'%';
+          
+        }, function(error){
+          alert('error occured in saving the image');
+        },
+        
+        function(){
+  
+          uploadTask.snapshot.ref.getDownloadURL().then(function(url){
+            ImageUrl = url;
+
+          });
+
+          if(ImageTitle == "" | ImageDescription ==""){
+            window.alert("Nothing to be Uploaded");
+
+          }else if(ImageUrl == ""){
+
+            window.alert("No photo Selected")
+
+          }else{
+
+            db.collection("Stories").doc().set({
+          Title: Title,
+          Story: Story,
+          Date: Date = new Date,
+          Image: ImageUrl,
+  
+          })
+          .then(function() {
+          console.log("Document successfully written!");
+          window.alert("Event uplaoded successfull")
+          })
+          .catch(function(error) {
+          console.error("Error writing document: ", error);
+          window.alert(error)
+          });
+  
+          }
+  
+  
+        }
+  
+        )
+  
+      }
+
+
+
+    
+</script>
+
+</body>
+</html>
