@@ -71,7 +71,7 @@
                   <br>
                   <div class="form-group">
                     <label  >Choose Image</label>
-                    <button  id="select" >Choose image</button>
+                    <button  type="button" id="select" >Choose image</button>
                   </div>
                   
                   <br>
@@ -103,7 +103,7 @@
                       <input class="form-check-input" type="checkbox" name="remember"> Remember me
                     </label>
                   </div> -->
-                    <button  id="Upload" class="btnSubmit">Publish</button>
+                    <button type="submit" id="Upload" class="btnSubmit">Publish</button>
                   <br>
                 </form>
               </div>
@@ -200,7 +200,7 @@
 
   <!-- The core Firebase JS SDK is always required and must be listed first -->
   <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/ui/8.2.3/firebase-ui-auth.js"></script>
+
   <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-storage.js"></script>
   
@@ -219,7 +219,6 @@
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
   </script>
-
 
 
 <script id="MainScript">
@@ -267,7 +266,7 @@
 
 
   
-        var uploadTask = firebase.storage().ref('Images/'+ImageTitle+".jpg").put(files[0]);
+        var uploadTask = firebase.storage().ref('Images/'+Title+".jpg").put(files[0]);
   
         uploadTask.on('state_changed',function(snapshots){
   
@@ -285,7 +284,7 @@
 
           });
 
-          if(ImageTitle == "" | ImageDescription ==""){
+          if(Title == "" | Story ==""){
             window.alert("Nothing to be Uploaded");
 
           }else if(ImageUrl == ""){

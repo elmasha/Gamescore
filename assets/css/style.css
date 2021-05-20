@@ -962,6 +962,35 @@ section {
 }
 
 
+.logIn h2:hover{
+  color: #;
+  font-weight: 700px;
+}
+.logIn h2{
+  color: #f68c09;
+  font-weight: 700px;
+}
+
+.logIn .BtnLogIn {
+  display: inline-block;
+  padding: 8px 40px 10px 40px;
+  border-radius: 50px;
+  color: #f68c09;
+  transition: none;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+  transition: 0.3s;
+  border: 1.5px solid #f68c09;
+}
+
+.logIn .BtnLogIn:hover {
+  background: #08da4e;
+  border: 1.5px solid #08da4e;
+  color: #fff;
+}
+
 
 
 
