@@ -38,8 +38,6 @@
       <nav id="navbar" class="navbar">
         <ul>
          
-          <li><a class="nav-link scrollto" href="#contact">Register</a></li>
-          <li><a class="nav-link scrollto" href="#contact">Log In</a></li>
           <li><a class="getstarted scrollto" href="#about">LogOut</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -63,49 +61,65 @@
         <section class="Upload">
             <div class="container ">
                 <h2>Upload Story</h2>
-                <form  method="post" class="col-md-10 text-center">
-                    <div class="form-group">
-                        <img id="myimg"><label id="upProgress"></label>
+
+
+
+                <div class="row">
+                    <div  class="col-md-10">
+      
+                      <form  method="post" class="text-center">
+                        <div class="form-group">
+                            <img id="myimg"><label id="upProgress"></label>
+                        </div>
+                        <br>
+                      <br>
+                      <div class="form-group">
+                        <label  >Choose Image</label>
+                        <button  type="button" id="select" >Choose image</button>
+                      </div>
+                      
+                      <br>
+                      <div class="form-group">
+                        <label for="title">Tittle:</label><br>
+                        <textarea type="text" class="form-control" id="title" placeholder="Title" rows="3" name="title"></textarea>
+                      </div>
+                      <br>
+                      <div class="form-group">
+                        <label for="story">Story:</label>
+                        <br>
+                        <textarea class="form-control"  placeholder="Write a story...." rows="16" id="story"></textarea>
+                      </div>
+                      <br>
+                      <div class="form-group">
+                        <label for="category">Select Category:</label>
+                            <select class="form-control" id="category">
+                                <option>Football</option>
+                                <option>Rugby</option>
+                                <option>Hockey</option>
+                                <option>Cricket</option>
+                                <option>Basket ball</option>
+                                <option>Tennis</option>
+                                <option>Boxing</option>
+                            </select>
+                      </div>
+                      <br>
+                      <!-- <div class="form-group form-check">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="checkbox" name="remember"> Remember me
+                        </label>
+                      </div> -->
+                        <button type="button" id="UploadStory" class="btnSubmit">Publish</button>
+                      <br>
+                      </form>
+
                     </div>
-                    <br>
-                  <br>
-                  <div class="form-group">
-                    <label  >Choose Image</label>
-                    <button  type="button" id="select" >Choose image</button>
-                  </div>
-                  
-                  <br>
-                  <div class="form-group">
-                    <label for="email">Tittle:</label><br>
-                    <input type="text" class="form-control" id="title" placeholder="Title" name="email">
-                  </div>
-                  <br>
-                  <div class="form-group">
-                    <label for="pwd">Story:</label>
-                    <br>
-                    <textarea class="form-control"  placeholder="Write a story...." rows="16" id="story"></textarea>
-                  </div>
-                  <br>
-                  <div class="form-group">
-                    <label for="category">Select Category:</label>
-                        <select class="form-control" id="category">
-                            <option>Football</option>
-                            <option>Rugby</option>
-                            <option>Hockey</option>
-                            <option>Cricket</option>
-                            <option>Basket ball</option>
-                            <option>Tennis</option>
-                        </select>
-                  </div>
-                  <br>
-                  <!-- <div class="form-group form-check">
-                    <label class="form-check-label">
-                      <input class="form-check-input" type="checkbox" name="remember"> Remember me
-                    </label>
-                  </div> -->
-                    <button type="submit" id="Upload" class="btnSubmit">Publish</button>
-                  <br>
-                </form>
+
+                    <div class="col-md-2">
+                      
+                    </div>
+
+              </div>
+              
               </div>
             
 
@@ -220,8 +234,10 @@
     firebase.initializeApp(firebaseConfig);
   </script>
 
-
+<script src="index.js"></script>
 <script id="MainScript">
+  var db = firebase.firestore();
+
 
      ///-------------------VARIABLES---------------------/////
      var Title,ImageUrl,Story,Category;
@@ -257,7 +273,7 @@
 
             ///-------------------UPLOAD IMAGE---------------------///
   
-      document.getElementById("Upload").onclick = function(){
+      document.getElementById("UploadStory").onclick = function(){
   
         Title = document.getElementById("title").value;
         Story = document.getElementById("story").value;
@@ -266,9 +282,9 @@
 
 
   
-        var uploadTask = firebase.storage().ref('Images/'+Title+".jpg").put(files[0]);
+        var uploadTask = firebase.storage().ref('Images/'+Category+".jpg").put(files[0]);
   
-        uploadTask.on('state_changed',function(snapshots){
+        uploadTask.on('firebase.storage.TaskEvent.STATE_CHANGED',function(snapshots){
   
             var progress = (snapshots.bytesTransfer/ snapshots.totalBytes)*100;
             document.getElementById('upProgress').innerHTML = 'Uploading..'+progress+'%';
@@ -294,15 +310,15 @@
           }else{
 
             db.collection("Stories").doc().set({
-          Title: Title,
-          Story: Story,
-          Date: Date = new Date,
-          Image: ImageUrl,
+          title: Title,
+          story: Story,
+          category :Category,
+          image: ImageUrl,
   
           })
           .then(function() {
           console.log("Document successfully written!");
-          window.alert("Event uplaoded successfull")
+          window.alert("Story published successfully")
           })
           .catch(function(error) {
           console.error("Error writing document: ", error);
