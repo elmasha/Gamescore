@@ -198,6 +198,14 @@ section {
   margin-top: 3px;
 }
 
+#category{
+  border: #f68c09 solid 1pt;
+}
+
+#category :hover{
+  border: #08da4e solid 1pt;
+}
+
 /*--------------------------------------------------------------
 # Navigation Menu
 --------------------------------------------------------------*/
@@ -1733,6 +1741,23 @@ section {
   font-size: 22px;
   margin-top: 30px;
   font-weight: bold;
+  color: #f68c09;
+}
+
+#blogh3{
+  color: #f68c09;
+}
+
+
+
+.carousel-item {
+  height: 100vh;
+  min-height: 350px;
+  background: no-repeat center center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .blog .entry .entry-content blockquote {
