@@ -22,10 +22,10 @@ function signIn(){
       .then((userCredential) => {
         // Signed in
         var user = userCredential.user;
+        window.alert("LogIn successful.");
+
         window.location.replace("uploadStory.html");
-        (document).ready(function(){
-            ('.toast').toast('show');
-          });
+       
         // ...
       })
       .catch((error) => {
@@ -37,6 +37,19 @@ function signIn(){
     }
   }
   
+
+
+function signOut(){
+// Sign out user
+ firebase.auth().signOut().then((e)=>{
+   window.alert(e)
+   window.location.replace("index.html");
+ })
+ .catch((err) =>{
+   // Handle errors
+   window.alert(err);
+ });
+}  
   
   firebase.auth().onAuthStateChanged((user)=>{
     if (user) {

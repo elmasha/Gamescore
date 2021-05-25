@@ -41,13 +41,16 @@
 
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top">
+
+
+  
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" alt="">
       </a>
       <div class="form-group col-md-2  container-fluid container-xl d-flex align-items-center justify-content-between">
         <br>
-            <select class="form-control" id="category">
+            <select  onclick="viewStoryFilter()" id="categoryView">
                 <option>Football</option>
                 <option>Rugby</option>
                 <option>Hockey</option>
@@ -62,8 +65,8 @@
         <ul>
          
           <li><a class="nav-link scrollto" href="#contact">Register</a></li>
-          <li><a class="nav-link scrollto" href="#contact">Log In</a></li>
-          <li><a class="getstarted scrollto" href="#about">LogOut</a></li>
+          <li><a class="nav-link scrollto" href="login.html">Log In</a></li>
+          <li><a class="getstarted scrollto" onclick="signOut()" href="">LogOut</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -94,7 +97,7 @@
         
         <div class="col-md-5  entries">
 
-              <h3 id="blogh3"><b>Sports new </b></h3>
+              <h3 id="blogh3"><b><a href="">News</a></b></h3>
                 <br>
 
 
@@ -112,23 +115,26 @@
             
 
               <div  id="list_photo"></div>
+              <div  id="list_photo2"></div>
         </div>
         
         <div class="col-md-4">
-            <h3 id="blogh3"><b>Predictions</b></h3>
+            <h3 id="blogh3"><b><a href="">Predictions</a></b></h3>
             <br>
             <div class="row">
               <div class="col-md-12">
   
                 <div class="sidebar">
     
-                 <h3 class="sidebar-title">Tags</h3>
+                 <h3 class="sidebar-title">Leagues</h3>
                   <div class="sidebar-item tags">
                     <ul>
-                      <li><a href="#">Top scores</a></li>
-                      <li><a href="#">Golden ball</a></li>
-                      <li><a href="#">Golden boots</a></li>
-                      <li><a href="#">Best player</a></li>
+                      <li><a href="#">EPL</a></li>
+                      <li><a href="#">Bundesliga</a></li>
+                      <li><a href="#">LA LIGA</a></li>
+                      <li><a href="#">Ligue 1</a></li>
+                      <li><a href="#">Eredivisie</a></li>
+                      <li><a href="#">Kpl</a></li>
                     </ul>
                   </div>
       
@@ -139,7 +145,7 @@
         </div>
 
         <div class="col-md-3">
-          <h3 id="blogh3"><b>LiveScore</b></h3>
+          <h3 id="blogh3"><b><a href="">LiveScore</a></b></h3>
           <br>
           <div class="row">
 
@@ -285,15 +291,31 @@
 
 <script>
 var db = firebase.firestore();
+let Doc_ID;
 
-viewCarousel();
-viewStory();
+
+// viewCarousel();
+viewStoryFilter();
+
+
+
+
+function moveToView(){
+  var getInput = prompt(Doc_ID);
+  window.location.replace("inner-page.html");
+  localStorage.setItem("id",getInput);
+
+
+}
 
 
 function viewCarousel(){
 
   const list_div2 = document.getElementById("list_carousel");
   var child_carousel = "";
+
+
+
 
   db.collection("Stories").onSnapshot(function(querySnapshot) {
           var carousellist = [];
@@ -360,7 +382,6 @@ function viewStory(){
                     // child_photo +="</div>";
 
                     child_photo +="<div class='entry-content'>";
-                    child_photo +=" <p >"+doc.data().story+"</p>";
                     child_photo +="</div>";
   
                     child_photo+= "</article>";
@@ -378,6 +399,50 @@ function viewStory(){
 
 }
 
+function viewStoryFilter(){
+var category = document.getElementById("categoryView").value;
+
+
+const list_div = document.getElementById("list_photo");
+var child_photo = "";
+
+
+db.collection("Stories").where("category", "==", category)
+    .get()
+    .then((querySnapshot) => {
+      var photolist = [];
+
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            console.log(doc.id, " => ", doc.data());
+            Doc_ID = doc.data().doc_ID;
+                 child_photo += "<article  onclick='moveToView()'  class='entry' data-aos='fade-up'>";
+
+                  child_photo +="<div class='entry-img'><img id='userphoto' src='";
+                  child_photo += doc.data().image;
+                  child_photo+="' class='img-fluid'/></div>";
+
+                  child_photo +="<h2 class='entry-title'>"+doc.data().title+"</h2>";
+
+                  // child_photo +="<div><ul>"+doc.data().Country+"</ul>";
+                  // child_photo +="</div>";
+
+                  child_photo +="<div class='entry-content'>";
+                  child_photo +="</div>";
+
+                  child_photo+= "</article>";
+
+
+                  photolist.push(list_div.innerHTML = child_photo);
+          
+        
+        
+        
+        
+        });
+        console.log("Current cities in CA: ", photolist.join(", "));
+    });
+}
 
 
 
