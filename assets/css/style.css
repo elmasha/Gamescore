@@ -2171,6 +2171,39 @@ section {
   font-size: 14px;
 }
 
+
+
+
+.inner-page{
+  margin: 10px;
+}
+
+.inner-page h1{
+ 
+}
+
+.inner-page h1:hover{
+  font-weight: 500;
+  color: #08da4e;
+  
+ }
+
+ #StoryTitle{
+  font-weight: 800;
+  color: #f68c09;
+ }
+
+ #StoryTitle:hover{
+  font-weight: 800;
+  color: #08da4e;
+  
+ }
+ #StoryDesc{
+   color: #000;
+   font-style: 200;
+   
+ }
+
 /*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
