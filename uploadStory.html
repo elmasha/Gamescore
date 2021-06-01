@@ -67,31 +67,31 @@
                 <div class="row">
                     <div  class="col-md-10">
       
-                      <form  method="post" class="text-center">
+                      <form  method="post" class="">
                         <div class="form-group">
                             <img id="myimg"><label id="upProgress"></label>
                         </div>
                         <br>
                       <br>
                       <div class="form-group">
-                        <label  >Choose Image</label>
-                        <button  type="button" id="select" >Choose image</button>
+                        <label id="label1" >Choose Image*</label>
+                        <input type="file" id="select" >Choose image</input>
                       </div>
                       
                       <br>
-                      <div class="form-group">
-                        <label for="title">Tittle:</label><br>
+                      <div class="form-group col-md-9">
+                        <label id="label1" for="title">Tittle*:</label><br>
                         <textarea type="text" class="form-control" id="title" placeholder="Title" rows="3" name="title"></textarea>
                       </div>
                       <br>
                       <div class="form-group">
-                        <label for="story">Story:</label>
+                        <label id="label1"for="story">Story*:</label>
                         <br>
                         <textarea class="form-control"  placeholder="Write a story...." rows="16" id="story"></textarea>
                       </div>
                       <br>
-                      <div class="form-group">
-                        <label for="category">Select Category:</label>
+                      <div class="form-group col-md-4">
+                        <label id="label1" for="category">Select Category*:</label>
                             <select class="form-control" id="category">
                                 <option>Football</option>
                                 <option>Rugby</option>
@@ -103,12 +103,33 @@
                             </select>
                       </div>
                       <br>
+                      <div class="form-group col-md-7">
+                        <label id="label1" for="title">Youtube link (optional):</label><br>
+                        <input type="text" class="form-control" id="youtubelink" placeholder="Youtube link" rows="3" name="title"></input>
+                      </div>
+                      <br>
+                      <div class="form-group col-md-7">
+                        <label id="label1" for="title">Instagram link (optional):</label><br>
+                        <input type="text" class="form-control" id="instlink" placeholder="Instagram link" rows="3" name="title"></input>
+                      </div>
+                      <br>
+                      <div class="form-group col-md-7">
+                        <label id="label1" for="title">Twitter link (optional):</label><br>
+                        <input type="text" class="form-control" id="twitterlink" placeholder="Twitter link" rows="3" name="title"></input>
+                      </div>
+                      <br>
+                      <div class="form-group col-md-7">
+                        <label id="label1" for="title">Other links (optional):</label><br>
+                        <input type="text" class="form-control" id="otherlinks" placeholder="Other links" rows="3" name="title"></input>
+                      </div>
+                      <br>
+                      <br>
                       <!-- <div class="form-group form-check">
                         <label class="form-check-label">
                           <input class="form-check-input" type="checkbox" name="remember"> Remember me
                         </label>
                       </div> -->
-                        <button type="button" id="UploadStory" class="btnSubmit">Publish</button>
+                        <button type="button" id="UploadStory" onclick="SaveStories()" class="btnSubmit col-md-8">Publish story</button>
                       <br>
                       </form>
 
@@ -156,6 +177,8 @@
               <a href="https://www.twitter.com/gamescoreske" class="twitter"><i class="bi bi-twitter"></i></a>
               <a href="https://www.facebook.com/GameScoresKe" class="facebook"><i class="bi bi-facebook"></i></a>
               <a href="https://www.instagram.com/gamescoreske" class="instagram"><i class="bi bi-instagram bx bxl-instagram"></i></a>
+              <a href="https://www.instagram.com/gamescoreske" class="youtube"><i class="bi bi-youtube bx bxl-youtube"></i></a>
+
             </div>
           </div>
 
@@ -210,31 +233,57 @@
   <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-storage.js"></script>
   
-  
-  
-  <script>
-    // Your web app's Firebase configuration
-    var firebaseConfig = {
-      apiKey: "AIzaSyAbf2dO7l3mZw5LPc0hgBkii1EmT3fDsXY",
-      authDomain: "gamescore-67bf3.firebaseapp.com",
-      projectId: "gamescore-67bf3",
-      storageBucket: "gamescore-67bf3.appspot.com",
-      messagingSenderId: "92233940710",
-      appId: "1:92233940710:web:91367a0f7bf4e07d400527"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-  </script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-analytics.js"></script>
 
-<script src="index.js"></script>
+     <script>
+       // Your web app's Firebase configuration
+       // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+       var firebaseConfig = {
+         apiKey: "AIzaSyBB2YZ6eJF5PnZeCXukRpb9ser3dxb1w3o",
+         authDomain: "gamescores-5be56.firebaseapp.com",
+         projectId: "gamescores-5be56",
+         storageBucket: "gamescores-5be56.appspot.com",
+         messagingSenderId: "250077256310",
+         appId: "1:250077256310:web:7d0fdbc096d20a577d1d57",
+         measurementId: "G-7KXWJR07EW"
+       };
+       // Initialize Firebase
+       firebase.initializeApp(firebaseConfig);
+       firebase.analytics();
+     </script>
+
+
+     
 <script id="MainScript">
   var db = firebase.firestore();
 
 
      ///-------------------VARIABLES---------------------/////
-     var Title,ImageUrl,Story,Category;
+     var Title,ImageUrl,Story,Category,youtube,instagram,twitter,others;
      var files = [];
      var reader;
+
+
+
+
+     /////------FirebaseAuth ----////
+
+     firebase.auth().onAuthStateChanged((user)=>{
+      if (user) {
+      //   User is signed in.
+          let user = firebase.auth().currentUser;
+          let uid
+          if(user != null){
+              uid = user.uid;
+          }else{
+            window.location.replace("index.html");
+  
+          }
+       
+      } else {
+      //   No user is signed in.
+      }
+    });
    
    
    ///-------------------SELECT IMAGE---------------------/////
@@ -242,20 +291,16 @@
    
          var input = document.createElement('input');
          input.type = 'file';
-   
          
-   
+         
          input.onchange = e =>{
    
            files = e.target.files;
            reader = new FileReader();
            reader.onload = function(){
-   
              document.getElementById("myimg").src = reader.result;
-             
            }
            reader.readAsDataURL(files[0]);
-   
          }
          input.click();
        }
@@ -264,76 +309,98 @@
 
 
             ///-------------------UPLOAD IMAGE---------------------///
+  function SaveStories(){
+
+    document.getElementById("UploadStory").onclick = function(){
   
-      document.getElementById("UploadStory").onclick = function(){
-  
-        Title = document.getElementById("title").value;
-        Story = document.getElementById("story").value;
-        Category = document.getElementById("category").value;
-      
+      Title = document.getElementById("title").value;
+      Story = document.getElementById("story").value;
+      Category = document.getElementById("category").value;
+      youtube = document.getElementById("youtubelink").value;
+      instagram = document.getElementById("instlink").value;
+      twitter = document.getElementById("twitterlink").value;
+      others = document.getElementById("otherlink").value;
+    
 
 
-  
-        var uploadTask = firebase.storage().ref('Images/'+Category+".jpg").put(files[0]);
-  
-        uploadTask.on('firebase.storage.TaskEvent.STATE_CHANGED',function(snapshots){
-  
-            var progress = (snapshots.bytesTransfer/ snapshots.totalBytes)*100;
-            document.getElementById('upProgress').innerHTML = 'Uploading..'+progress+'%';
-          
-        }, function(error){
-          alert('error occured in saving the image');
-        },
+
+      var uploadTask = firebase.storage().ref('Images/'+Category+".jpg").put(files[0]);
+
+      uploadTask.on('firebase.storage.TaskEvent.STATE_CHANGED',function(snapshots){
+
+          var progress = (snapshots.bytesTransfer/ snapshots.totalBytes)*100;
+          document.getElementById('upProgress').innerHTML = 'Uploading..'+progress+'%';
         
-        function(){
-  
-          uploadTask.snapshot.ref.getDownloadURL().then(function(url){
-            ImageUrl = url;
+      }, function(error){
+        alert('error occured in saving the image');
+      },
+      
+      function(){
 
-          });
+        uploadTask.snapshot.ref.getDownloadURL().then(function(url){
+          ImageUrl = url;
 
-          if(Title == "" | Story ==""){
-            window.alert("Nothing to be Uploaded");
+        });
 
-          }else if(ImageUrl == ""){
+        if(Title == "" | Story ==""){
+          window.alert("Nothing to be Uploaded");
 
-            window.alert("No photo Selected")
+        }else if(ImageUrl == ""){
 
-          }else{
+          window.alert("No photo Selected")
 
-
-            const ref = db.collection('Stories').doc();
-            const id = ref.id;
+        }else{
 
 
-          db.collection("Stories").doc(id).set({
-          title: Title,
-          story: Story,
-          category :Category,
-          doc_ID : id,
-          image: ImageUrl,
-  
-          })
-          .then(function() {
-          console.log("Document successfully written!");
-          window.alert("Story published successfully")
-          ImageUrl = null;
-          })
-          .catch(function(error) {
-          console.error("Error writing document: ", error);
-          window.alert(error)
-          ImageUrl = null;
-          });
-  
-          }
-  
-  
+          const ref = db.collection('Stories').doc();
+          const id = ref.id;
+
+
+        db.collection("Stories").doc(id).set({
+        title: Title,
+        story: Story,
+        category :Category,
+        doc_ID : id,
+        youtubeLink : youtube,
+        intasgramLink: instagram,
+        twitterLink : twitter,
+        otherLinks: others,
+        image: ImageUrl,
+
+        })
+        .then(function() {
+        console.log("Document successfully written!");
+        window.alert("Story published successfully")
+        ImageUrl = null;
+        Title = "";
+        Story = "";
+        Category = "";
+        youtube = "";
+        instagram = "";
+        twitter = "";
+        others = "";
+      
+        })
+        .catch(function(error) {
+        console.error("Error writing document: ", error);
+        window.alert(error)
+        ImageUrl = null;
+        });
+
         }
-  
-        )
-  
+
+
       }
 
+      )
+
+    }
+
+
+
+
+  }
+ 
 
 
     

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login Admin</title>
 </head>
 
  <!-- Favicons -->
@@ -95,7 +95,7 @@
                         </div>
                         <br>
                         <br>
-                        <div ><button type="submit" class="BtnLogIn" onclick="signIn()">Login</button></div>
+                        <div ><button type="submit" class="BtnLogIn col-md-5" onclick="signIn()">Login</button></div>
                       </form>
                     </div>
           
@@ -113,8 +113,8 @@
     </main>
 
 
-   <!-- ======= Footer ======= -->
-   <footer id="footer" class="footer">
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
 
    
     <div class="footer-top">
@@ -130,6 +130,8 @@
               <a href="https://www.twitter.com/gamescoreske" class="twitter"><i class="bi bi-twitter"></i></a>
               <a href="https://www.facebook.com/GameScoresKe" class="facebook"><i class="bi bi-facebook"></i></a>
               <a href="https://www.instagram.com/gamescoreske" class="instagram"><i class="bi bi-instagram bx bxl-instagram"></i></a>
+              <a href="https://www.instagram.com/gamescoreske" class="youtube"><i class="bi bi-youtube bx bxl-youtube"></i></a>
+
             </div>
           </div>
 
@@ -138,7 +140,7 @@
             <p>
               Kisumu, KSM 9451<br>
               Kenya <br><br>
-              <strong>Phone:</strong> +254 70 451 675<br>
+              <strong>Phone:</strong> +254 70 511 675<br>
               <strong>Email:</strong> marvin@gamescore.co.ke<br>
             </p>
 
@@ -157,7 +159,7 @@
         <!-- You can delete the links only if you purchased the pro version. -->
         <!-- Licensing information: https://bootstrapmade.com/license/ -->
         <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/flexstart-bootstrap-startup-template/ -->
-        Designed by <a href="login.html">Elmasha Omondi</a>
+        Designed by <a href="uploadStory.html">Elmasha Omondi</a>
       </div>
     </div>
   </footer>
@@ -190,24 +192,26 @@
   <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-auth.js"></script>
 
-  
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+     <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-analytics.js"></script>
 
- 
- 
- <script>
-   // Your web app's Firebase configuration
-   var firebaseConfig = {
-     apiKey: "AIzaSyAbf2dO7l3mZw5LPc0hgBkii1EmT3fDsXY",
-     authDomain: "gamescore-67bf3.firebaseapp.com",
-     projectId: "gamescore-67bf3",
-     storageBucket: "gamescore-67bf3.appspot.com",
-     messagingSenderId: "92233940710",
-     appId: "1:92233940710:web:91367a0f7bf4e07d400527"
-   };
-   // Initialize Firebase
-   firebase.initializeApp(firebaseConfig);
- </script>
-
+     <script>
+       // Your web app's Firebase configuration
+       // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+       var firebaseConfig = {
+         apiKey: "AIzaSyBB2YZ6eJF5PnZeCXukRpb9ser3dxb1w3o",
+         authDomain: "gamescores-5be56.firebaseapp.com",
+         projectId: "gamescores-5be56",
+         storageBucket: "gamescores-5be56.appspot.com",
+         messagingSenderId: "250077256310",
+         appId: "1:250077256310:web:7d0fdbc096d20a577d1d57",
+         measurementId: "G-7KXWJR07EW"
+       };
+       // Initialize Firebase
+       firebase.initializeApp(firebaseConfig);
+       firebase.analytics();
+     </script>
 <script src="index.js"></script>
 
 

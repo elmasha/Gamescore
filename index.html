@@ -23,6 +23,7 @@
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/iconfont/iconfont.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
 
@@ -51,15 +52,18 @@
       </a>
       <div class="form-group col-md-2  container-fluid container-xl d-flex align-items-center justify-content-between">
         <br>
+        
             <select  onclick="viewStoryFilter()" id="categoryView">
-                <option>Football</option>
-                <option>Rugby</option>
-                <option>Hockey</option>
-                <option>Cricket</option>
-                <option>Basket ball</option>
-                <option>Tennis</option>
-                <option>Boxing</option>
+                <option value="Football">Football</option>
+                <option value="Rugby">Rugby</option>
+                <option value="Hockey">Hockey</option>
+                <option value="Cricket">Cricket</option>
+                <option value="Basket ball">Basket ball</option>
+                <option value="Tennis">Tennis</option>
+                <option value="Boxing">Boxing</option>
             </select>
+
+            <label for="categoryView"><i class="iconfont-search-2"></i></label>
       </div>
 
       <nav id="navbar" class="navbar">
@@ -117,14 +121,13 @@
 
     <div id="topBar" class="container">
 
-      <div class="col-md-12">  
+      <div class="col-md-12 align-center">  
         <div class="row">
           <div id="bunner" class="col-md-12">      
             <div class="bunner container-fluid container-xl d-flex container col-md-12  text-center"data-aos="fade-up">
-              <span class="col-md-4"><a class="nav-link scrollto active" href="#list_photo"><h4><b>News</b></h4></a></span>
-              <span class="col-md-4"><a class="nav-link scrollto" href="#prediction"><h4><b>Predictions</b></h4></a></span>
-              <br>
-              <span class="col-md-4"><a class="nav-link scrollto" href="#livescore"><h4 ><b>LiveScore</b></h4></a></span>
+              <span class="col-md-4"><a class="nav-link scrollto active" href="#list_photo"><h6><b>News</b></h6></a></span>
+              <span class="col-md-4"><a class="nav-link scrollto" href="#prediction"><h6><b>Predictions</b></h6></a></span>
+              <span class="col-md-4"><a class="nav-link scrollto" href="#livescore"><h6 ><b>LiveScore</b></h6></a></span>
              
             </div>
           </div>
@@ -165,9 +168,10 @@
             <div  class="row">
               <div class="col-md-12">
   
+            
                 <div class="sidebar">
     
-                 <h3 class="sidebar-title">Leagues</h3>
+                 <h3 class="sidebar-title" onclick="createNotification()">Leagues</h3>
                   <div id="prediction" class="sidebar-item tags">
                     <ul>
                       <li><a href="#">EPL</a></li>
@@ -248,6 +252,8 @@
               <a href="https://www.twitter.com/gamescoreske" class="twitter"><i class="bi bi-twitter"></i></a>
               <a href="https://www.facebook.com/GameScoresKe" class="facebook"><i class="bi bi-facebook"></i></a>
               <a href="https://www.instagram.com/gamescoreske" class="instagram"><i class="bi bi-instagram bx bxl-instagram"></i></a>
+              <a href="https://www.instagram.com/gamescoreske" class="youtube"><i class="bi bi-youtube bx bxl-youtube"></i></a>
+
             </div>
           </div>
 
@@ -275,7 +281,7 @@
         <!-- You can delete the links only if you purchased the pro version. -->
         <!-- Licensing information: https://bootstrapmade.com/license/ -->
         <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/flexstart-bootstrap-startup-template/ -->
-        Designed by <a href="login.html">Elmasha Omondi</a>
+        Designed by <a href="uploadStory.html">Elmasha Omondi</a>
       </div>
     </div>
   </footer>
@@ -306,41 +312,80 @@
 
   <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-storage.js"></script>
-  <script src="//Microsoft.Advertising.JavaScript/ad.js"></script>
-
-  <script type="text/javascript" src="cordova.js"></script>
-
-  <script type="text/javascript" src="game.min.js"></script>
-  
-  <script>
-    // Your web app's Firebase configuration
-    var firebaseConfig = {
-      apiKey: "AIzaSyAbf2dO7l3mZw5LPc0hgBkii1EmT3fDsXY",
-      authDomain: "gamescore-67bf3.firebaseapp.com",
-      projectId: "gamescore-67bf3",
-      storageBucket: "gamescore-67bf3.appspot.com",
-      messagingSenderId: "92233940710",
-      appId: "1:92233940710:web:91367a0f7bf4e07d400527"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-  </script>
-
+  <script src="assests/push.js"></script>
+ 
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-analytics.js"></script>
 
 <script>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyBB2YZ6eJF5PnZeCXukRpb9ser3dxb1w3o",
+    authDomain: "gamescores-5be56.firebaseapp.com",
+    projectId: "gamescores-5be56",
+    storageBucket: "gamescores-5be56.appspot.com",
+    messagingSenderId: "250077256310",
+    appId: "1:250077256310:web:7d0fdbc096d20a577d1d57",
+    measurementId: "G-7KXWJR07EW"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
+
+<script>
+  
 var db = firebase.firestore();
 let Doc_ID;
+if ('serviceWorker' in navigator) {
+  // Register a service worker hosted at the root of the
+  // site using the default scope.
+  navigator.serviceWorker.register('serviceWorker.js').then(function(registration) {
+    console.log('Service worker registration succeeded:', registration);
+  }, /*catch*/ function(error) {
+    console.log('Service worker registration failed:', error);
+  });
+} else {
+  console.log('Service workers are not supported.');
+}
+
+
 
 // viewCarousel();
 viewStoryFilter();
+//requestPermission();
+
+
+
+function requestPermission() {
+  return new Promise(function(resolve, reject) {
+    const permissionResult = Notification.requestPermission(function(result) {
+      // Handling deprecated version with callback.
+      resolve(result);
+    });
+
+    if (permissionResult) {
+      permissionResult.then(resolve, reject);
+    }
+  })
+  .then(function(permissionResult) {
+    if (permissionResult !== 'granted') {
+      throw new Error('Permission not granted.');
+    }
+  });
+}
 
 
 
 
-function banner() {  CocoonJS.Ad.onBannerReady.addEventListener(function(){          
-    CocoonJS.Ad.setBannerLayout(CocoonJS.Ad.BannerLayout.BOTTOM_CENTER);            
-    CocoonJS.Ad.showBanner(); });   
-   }
+
+function createNotification(){
+  push.create("yow")
+}
+
+
 
 function moveToView(){
   localStorage.clear();

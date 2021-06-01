@@ -58,11 +58,11 @@ function signOut(){
         let uid
         if(user != null){
             uid = user.uid;
+        }else{
+          window.location.replace("index.html");
+
         }
-        let firebaseRefKey = firebase.database().ref().child(uid);
-        firebaseRefKey.on('value', (dataSnapShot)=>{
-           
-        })
+     
     } else {
     //   No user is signed in.
     }
