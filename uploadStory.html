@@ -75,7 +75,7 @@
                       <br>
                       <div class="form-group">
                         <label id="label1" >Choose Image*</label>
-                        <input type="file" id="select" >Choose image</input>
+                        <button type="button" id="selectPhoto"  >Choose image</button>
                       </div>
                       
                       <br>
@@ -252,7 +252,6 @@
        firebase.analytics();
      </script>
 
-
      
 <script id="MainScript">
   var db = firebase.firestore();
@@ -260,7 +259,7 @@
 
      ///-------------------VARIABLES---------------------/////
      var Title,ImageUrl,Story,Category,youtube,instagram,twitter,others;
-     var files = [];
+     var filess = [];
      var reader;
 
 
@@ -268,26 +267,44 @@
 
      /////------FirebaseAuth ----////
 
-     firebase.auth().onAuthStateChanged((user)=>{
-      if (user) {
-      //   User is signed in.
-          let user = firebase.auth().currentUser;
-          let uid
-          if(user != null){
-              uid = user.uid;
-          }else{
-            window.location.replace("index.html");
+    //  mAuth.auth().onAuthStateChanged((user)=>{
+    //   if (user) {
+    //   //   User is signed in.
+    //       let user = firebase.auth().currentUser;
+    //       let uid
+    //       if(user != null){
+    //           uid = user.uid;
+    //       }else{
+    //         window.location.replace("index.html");
   
-          }
+    //       }
        
-      } else {
-      //   No user is signed in.
-      }
-    });
+    //   } else {
+    //   //   No user is signed in.
+    //   }
+    // });
    
    
    ///-------------------SELECT IMAGE---------------------/////
-       document.getElementById("select").onclick = function(e){
+
+  //  function readURL(input) {
+  //           if (input.files && input.files[0]) {
+  //               var reader = new FileReader();
+
+  //               reader.onload = function (e) {
+  //                   $("myimg")
+  //                       .attr('src', e.target.result)
+  //                       .width(150)
+  //                       .height(200);
+  //               };
+
+  //               reader.readAsDataURL(input.files[0]);
+  //           }
+  //       }
+
+
+
+       document.getElementById("selectPhoto").onclick = function(e){
    
          var input = document.createElement('input');
          input.type = 'file';
@@ -309,7 +326,6 @@
 
 
             ///-------------------UPLOAD IMAGE---------------------///
-  function SaveStories(){
 
     document.getElementById("UploadStory").onclick = function(){
   
@@ -319,17 +335,25 @@
       youtube = document.getElementById("youtubelink").value;
       instagram = document.getElementById("instlink").value;
       twitter = document.getElementById("twitterlink").value;
-      others = document.getElementById("otherlink").value;
+      others = document.getElementById("otherlinks").value;
     
 
 
+      let guid = () => {
+         let s4 = () => {
+            return Math.floor((1 + Math.random()) * 0x10000)
+                .toString(16)
+                .substring(1);
+          }
+        return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+      }
 
-      var uploadTask = firebase.storage().ref('Images/'+Category+".jpg").put(files[0]);
+
+      var uploadTask = firebase.storage().ref('Images/'+guid()+".jpg").put(filess[0]);
 
       uploadTask.on('firebase.storage.TaskEvent.STATE_CHANGED',function(snapshots){
 
           var progress = (snapshots.bytesTransfer/ snapshots.totalBytes)*100;
-          document.getElementById('upProgress').innerHTML = 'Uploading..'+progress+'%';
         
       }, function(error){
         alert('error occured in saving the image');
@@ -388,18 +412,9 @@
         });
 
         }
-
-
-      }
-
-      )
-
+      })
     }
-
-
-
-
-  }
+  
  
 
 

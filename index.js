@@ -7,6 +7,9 @@ var db = firebase.firestore();
 
 
 
+
+
+
 // xxxxxxxxxx Check email or password exsist in firebase authentication xxxxxxxxxx    
 function signIn(){
     var userSIEmail = document.getElementById("email").value;
