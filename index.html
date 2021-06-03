@@ -19,7 +19,6 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
 
-  <script data-ad-client="ca-pub-9536056765018224" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -38,6 +37,10 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+
+
+  <script data-ad-client="ca-pub-9536056765018224"
+   async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </head>
 
 <body>
@@ -296,6 +299,8 @@
 
   <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-auth.js"></script>
+
  
   <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
@@ -319,7 +324,7 @@
 </script>
 
 <script>
-  
+let mAuth = firebase.auth();  
 var db = firebase.firestore();
 let Doc_ID;
 if ('serviceWorker' in navigator) {
@@ -338,7 +343,7 @@ if ('serviceWorker' in navigator) {
 
 // viewCarousel();
 viewStoryFilter();
-//requestPermission();
+requestPermission();
 
 
 
@@ -370,11 +375,10 @@ function createNotification(){
 
 
 
-function moveToView(){
+function moveToView(doc_ID){
   localStorage.clear();
-  localStorage.setItem( 'id', Doc_ID );
+  localStorage.setItem( 'id', doc_ID);
   window.location.replace("inner-page.html");
-  
 }
 
 
@@ -484,8 +488,8 @@ db.collection("Stories").where("category", "==", category)
         querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
             console.log(doc.id, " => ", doc.data());
-            Doc_ID = doc.data().doc_ID;
-                 child_photo += "<article  onclick='moveToView()'  class='entry' data-aos='fade-up'>";
+            Doc_ID = doc.id;
+                 child_photo += "<article  onclick='moveToView(Doc_ID)'  class='entry' data-aos='fade-up'>";
 
                   child_photo +="<div class='entry-img'><img id='userphoto' src='";
                   child_photo += doc.data().image;

@@ -50,14 +50,13 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a onclick="ClearStorage()" href="index.html">Back</a></li>
+          <li><a  href="index.html">Back</a><span onclick="ClearStorage()"></span></li>
           <li><a class="nav-link scrollto" href="#contact">Register</a></li>
           <li><a class="nav-link scrollto" href="login.html">Log In</a></li>
           <li><a class="getstarted scrollto" onclick="signOut()" href="">LogOut</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-
     </div>
 
 
@@ -77,7 +76,10 @@
           <br>
           <h2 id="StoryTitle"></h2>
           <br>
-          <p id="StoryDesc"></p>
+          <p id="StoryDesc"><a id="embed1" href=""><embed src="blank" width="400" height="300" frameborder='no' scrolling='no'></embed></a>
+          </p>
+          <br>
+          <a id="embed2" href=""><embed src="blank" width="400" height="300" frameborder='no' scrolling='no'></embed></a>
         </div>
        
       </div>
@@ -162,6 +164,7 @@
    
    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-analytics.js"></script>
 
+
    <script>
      // Your web app's Firebase configuration
      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -171,8 +174,8 @@
        projectId: "gamescores-5be56",
        storageBucket: "gamescores-5be56.appspot.com",
        messagingSenderId: "250077256310",
-       appId: "1:250077256310:web:7d0fdbc096d20a577d1d57",
-       measurementId: "G-7KXWJR07EW"
+       appId: "1:250077256310:web:f0d9d8c132570f5c7d1d57",
+       measurementId: "G-NCSGZE8GQQ"
      };
      // Initialize Firebase
      firebase.initializeApp(firebaseConfig);
@@ -186,7 +189,8 @@
   <script src="assets/js/main.js"></script>
 
 
-  <script>
+<script>
+
 var db = firebase.firestore();
 var Doc_id ="";  
 
@@ -197,6 +201,10 @@ viewStoryFilter(Doc_id);
 
 function ClearStorage (){
   localStorage.clear(); //clean the localstorage
+  localStorage.setItem( 'id',Doc_id);
+  localStorage.clear();
+  window.location.replace("index.html");
+
 }
 
 function viewStoryFilter(Doc_id){
@@ -205,6 +213,12 @@ const list_div = document.getElementById("list_photo");
 var img = document.getElementById("StoryImage");
 const title = document.getElementById("StoryTitle");
 const desc = document.getElementById("StoryDesc");
+const frame1 = document.getElementById("embed1");
+const frame2 = document.getElementById("embed2");
+
+
+
+
 
 
 db.collection("Stories").where("doc_ID", "==", Doc_id)
@@ -215,10 +229,14 @@ db.collection("Stories").where("doc_ID", "==", Doc_id)
             // doc.data() is never undefined for query doc snapshots
             console.log(doc.id, " => ", doc.data());
                
-            img.src = doc.data().image;
+                  img.src = doc.data().image;
                   title.innerHTML = doc.data().title;
                   desc.innerHTML = doc.data().story;
-                  console.log("Title", title);
+                  frame1.innerHTML.src =  doc.data().instagramLink;
+                  frame2.innerHTML.src =  doc.data().twitterLink;
+
+                  console.log("Inst", doc.data().instagramLink);
+                  console.log("twitter", doc.data().twitterLink);
         });
         
     });
