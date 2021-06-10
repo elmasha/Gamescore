@@ -89,31 +89,19 @@
 
   <main id="main">
 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <!-- head -->
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-9536056765018224"
-         data-ad-slot="2919024145"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
+   
     
-      
-  
     
   <div class="container">
    
-    <div class="col-md-12">
-      <div class="col-md-12">
-      </div>
   <!-- ======= Blog Section ======= -->
+  
+  <div class="co-md-12">
+    <a href="https://jalangotv.com/mozzart-bet-offers-biggest-odds-for-czech-republic-uruguay-and-argetina/"><div  id="headerimage" class=""></div></a>
+
+  </div>
   <section id="blog" class="blog">
-    <a href=""><div class="col-md-12" id="headerimage" class=""></div></a>
-    <br>
-    <br>
+   
     <div id="topBar" class="container">
 
       <div class="col-md-12 align-center">  
@@ -330,6 +318,7 @@
 let mAuth = firebase.auth();  
 var db = firebase.firestore();
 let Doc_ID;
+let title,story,imageURi;
 if ('serviceWorker' in navigator) {
   // Register a service worker hosted at the root of the
   // site using the default scope.
@@ -379,10 +368,55 @@ function createNotification(){
 
 
 function moveToView(doc_ID){
-  localStorage.clear();
-  localStorage.setItem( 'id', doc_ID);
-  window.location.replace("inner-page.html");
+  // localStorage.setItem( 'id', doc_ID);
+  window.document.location ='inner-page.html'+ '?id='+doc_ID;
 }
+
+
+function viewStoryFilter(){
+var category = document.getElementById("categoryView").value;
+
+
+const list_div = document.getElementById("list_photo");
+var child_photo = "";
+
+
+db.collection("Stories").where("category", "==", category)
+    .get()
+    .then((querySnapshot) => {
+      var photolist = [];
+
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            console.log(doc.id, " => ", doc.data());
+            Doc_ID = doc.data().doc_ID;
+            title = doc.data().title;
+            story = doc.data().story;
+            imageURi = doc.data().image;
+                 child_photo += "<article  onclick='moveToView(Doc_ID)'  class='entry' data-aos='fade-up'>";
+
+                  child_photo +="<div class='entry-img'><img id='userphoto' src='";
+                  child_photo += doc.data().image;
+                  child_photo+="' class='img-fluid'/></div>";
+
+                  child_photo +="<h2 class='entry-title'>"+doc.data().title+"</h2>";
+
+                  // child_photo +="<div><ul>"+doc.data().Country+"</ul>";
+                  // child_photo +="</div>";
+
+                  child_photo +="<div class='entry-content'>";
+                  child_photo +="</div>";
+
+                  child_photo+= "</article>";
+                  photolist.push(list_div.innerHTML = child_photo);
+          
+        
+      
+        });
+        console.log("Current cities in CA: ", photolist.join(", "));
+    });
+}
+
 
 
 function viewCarousel(){
@@ -475,46 +509,6 @@ function viewStory(){
 
 }
 
-function viewStoryFilter(){
-var category = document.getElementById("categoryView").value;
-
-
-const list_div = document.getElementById("list_photo");
-var child_photo = "";
-
-
-db.collection("Stories").where("category", "==", category)
-    .get()
-    .then((querySnapshot) => {
-      var photolist = [];
-
-        querySnapshot.forEach((doc) => {
-            // doc.data() is never undefined for query doc snapshots
-            console.log(doc.id, " => ", doc.data());
-            Doc_ID = doc.id;
-                 child_photo += "<article  onclick='moveToView(Doc_ID)'  class='entry' data-aos='fade-up'>";
-
-                  child_photo +="<div class='entry-img'><img id='userphoto' src='";
-                  child_photo += doc.data().image;
-                  child_photo+="' class='img-fluid'/></div>";
-
-                  child_photo +="<h2 class='entry-title'>"+doc.data().title+"</h2>";
-
-                  // child_photo +="<div><ul>"+doc.data().Country+"</ul>";
-                  // child_photo +="</div>";
-
-                  child_photo +="<div class='entry-content'>";
-                  child_photo +="</div>";
-
-                  child_photo+= "</article>";
-                  photolist.push(list_div.innerHTML = child_photo);
-          
-        
-      
-        });
-        console.log("Current cities in CA: ", photolist.join(", "));
-    });
-}
 
 
 

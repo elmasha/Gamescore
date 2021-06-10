@@ -221,12 +221,11 @@ section {
 
 .bunner {
   padding: 0px;
-  overflow-x: auto;
 
 }
 
 #bunner{
-  padding: 10px;
+  padding: 0px;
 }
 
 
@@ -462,7 +461,8 @@ section {
   height: 20vh;
   background: url(../img/header.jpg) top center no-repeat;
   background-size:contain;
-  overflow: hidden;
+  overflow: inherit;
+  background-position: 50% 50%;
 }
 #headerimage2 {
   width: 100%;
@@ -470,6 +470,19 @@ section {
   background: url(../img/header2.jpg) top center no-repeat;
   background-size:contain;
   overflow: hidden;
+}
+
+#showUS{
+  color: #f68c09;
+  font-size: 18px;
+  margin: 20px;
+  font-weight: 300;
+}
+
+#showUS :hover{
+  color: #08da4e;
+  font-size: 18px;
+  font-weight: 300;
 }
 
 .hero h1 {

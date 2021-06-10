@@ -50,10 +50,9 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a  href="index.html">Back</a><span onclick="ClearStorage()"></span></li>
-          <li><a class="nav-link scrollto" href="#contact">Register</a></li>
+          <li><a  href="index.html">Back to Homepage</a><span onclick="ClearStorage()"></span></li>
+          <li><a class="nav-link scrollto" href="#contact"></a></li>
           <li><a class="nav-link scrollto" href="login.html">Log In</a></li>
-          <li><a class="getstarted scrollto" onclick="signOut()" href="">LogOut</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -67,22 +66,43 @@
   
 
     <section class="inner-page text-center">
-      <a href=""><div class="col-md-12" id="headerimage2" class=""></div></a>
-      <br>
+      <a href="https://jalangotv.com/mozzart-bet-offers-biggest-odds-for-czech-republic-uruguay-and-argetina/"><div class="col-md-12" id="headerimage2" class=""></div></a>
       <br>
       <div class="container ">
         <div class="col-md-9">
-          <img width="90%" height="470px" id="StoryImage" src="" alt="">
+          <img width="90%" height="500vh" id="StoryImage" src="" alt="">
           <br>
           <br>
-          <br>
+          <div class="col-md-12">
+            <div  class="col-md-12 container-fluid container-xl d-flex container col-md-12  text-center">
+              <span id="showUS" onclick="LikeCount()" ><i id="likes"  class="ri-heart-fill"></i></span>
+              <span id="showUS"  ><i id="comments" class="ri-message-2-fill"></i></span>
+              <span id="showUS" ><i   class="ri-share-fill"></i> Share</span>
+              <span id="showUS" ></span>
+              
+            </div>
+
+          </div>
           <br>
           <h2 id="StoryTitle"></h2>
           <br>
-          <p   id="StoryDesc"><a id="embed1" href=""><embed src="blank" width="400" height="300" frameborder='no' scrolling='no'></embed></a>
+          <p  id="StoryDesc"><a id="embed1" href=""><embed src="blank" width="400" height="300" frameborder='no' scrolling='no'></embed></a>
           </p>
+          
           <br>
           <a id="embed2" href=""><embed src="blank" width="400" height="300" frameborder='no' scrolling='no'></embed></a>
+          <br>
+          <br>
+          <div class="col-md-12">
+            <div>
+              <form action="" method="POST">
+                <div class="col-md-12 container-fluid container-xl d-flex container col-md-12  text-center">
+                  <textarea class="form-control"  placeholder="Write a comment...." rows="1" id="comment"></textarea><button onclick="SaveComment()"  type="button"><i class="ri-send-plane-2-fill"></i></button>
+                </div>
+
+              </form>
+            </div>
+      </div>
         </div>
        
       </div>
@@ -107,6 +127,7 @@
                 <a href="https://www.twitter.com/gamescoreske" class="twitter"><i class="bi bi-twitter"></i></a>
                 <a href="https://www.facebook.com/GameScoresKe" class="facebook"><i class="bi bi-facebook"></i></a>
                 <a href="https://www.instagram.com/gamescoreske" class="instagram"><i class="bi bi-instagram bx bxl-instagram"></i></a>
+                <a href="https://www.instagram.com/gamescoreske" class="youtube"><i class="bi bi-youtube bx bxl-youtube"></i></a>
               </div>
             </div>
   
@@ -195,20 +216,21 @@
 <script>
 
 var db = firebase.firestore();
-var Doc_id ="";  
+var Doc_id ="";
+let _comment;
+let _like;  
 
 
 
-Doc_id = localStorage['id'];
+Doc_id = document.location.search.replace(/^.*?\=/,'')
 viewStoryFilter(Doc_id);
+viewStoryComment(Doc_id);
 
 function ClearStorage (){
-  localStorage.clear(); //clean the localstorage
-  localStorage.setItem( 'id',Doc_id);
-  localStorage.clear();
-  window.location.replace("index.html");
-
+ //clean the localstorage
+  localStorage.setItem( 'id', 0);
 }
+
 
 function viewStoryFilter(Doc_id){
 
@@ -218,8 +240,8 @@ const title = document.getElementById("StoryTitle");
 const desc = document.getElementById("StoryDesc");
 const frame1 = document.getElementById("embed1");
 const frame2 = document.getElementById("embed2");
-
-
+let comm = document.getElementById("comments");
+let likee = document.getElementById("likes");
 
 
 
@@ -235,6 +257,8 @@ db.collection("Stories").where("doc_ID", "==", Doc_id)
                   img.src = doc.data().image;
                   title.innerHTML = doc.data().title;
                   desc.innerHTML = doc.data().story;
+                  comm.innerHTML = "  Comments "+doc.data().comment;
+                  likee.innerHTML = "  likes "+doc.data().like;
                   frame1.innerHTML.src =  doc.data().instagramLink;
                   frame2.innerHTML.src =  doc.data().twitterLink;
 
@@ -245,6 +269,84 @@ db.collection("Stories").where("doc_ID", "==", Doc_id)
     });
 }
 
+
+function viewStoryComment(Doc_id){
+
+const list_div = document.getElementById("list_photo");
+var img = document.getElementById("StoryImage");
+const title = document.getElementById("StoryTitle");
+const desc = document.getElementById("StoryDesc");
+const frame1 = document.getElementById("embed1");
+const frame2 = document.getElementById("embed2");
+let comm = document.getElementById("comments");
+
+db.collection("Stories").where("doc_ID", "==", Doc_id)
+    .get()
+    .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+                  _comment = doc.data().comment;
+                  _like = doc.data().like;
+                  console.log("Comments",_comment)
+                 
+        });
+        
+    });
+}
+
+
+
+function LikeCount(){
+  var batch = db.batch();
+        var batch2 = db.batch();
+ 
+        var boost = db.collection("Stories").doc(Doc_id);
+        let count = _like + 1;
+       
+        batch.update(boost,{"like":count});
+ 
+        batch.commit().then((ref) =>{
+            console.log("Batch2 complete: ", Doc_id);
+            viewStoryFilter(Doc_id);
+ 
+        });
+}
+
+
+
+function SaveComment(){
+  let _comment = document.getElementById("comment").value;
+
+  db.collection("Stories").doc(Doc_id).collection("Comments").doc().set({
+        comment: _comment,
+        })
+        .then(function() {
+        console.log("Comment added successfully");
+        window.alert("Comment added successfully")
+        BatchComment();
+        })
+        .catch(function(error) {
+        console.error("Error writing document: ", error);
+        window.alert(error)
+        });
+}
+
+
+
+function BatchComment (){
+  var batch = db.batch();
+        var batch2 = db.batch();
+ 
+        var boost = db.collection("Stories").doc(Doc_id);
+        let count = _comment + 1;
+       
+        batch.update(boost,{"comment":count});
+ 
+        batch.commit().then((ref) =>{
+            console.log("Batch complete: ", Doc_id);
+            viewStoryFilter(Doc_id);
+        });
+}
 
 
 
