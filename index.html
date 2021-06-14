@@ -319,6 +319,7 @@ let mAuth = firebase.auth();
 var db = firebase.firestore();
 let Doc_ID;
 let title,story,imageURi;
+
 if ('serviceWorker' in navigator) {
   // Register a service worker hosted at the root of the
   // site using the default scope.
@@ -333,11 +334,11 @@ if ('serviceWorker' in navigator) {
 
 
 
+
 // viewCarousel();
 viewStoryFilter();
 requestPermission();
-
-
+window.onload.location.search('id',null)
 
 function requestPermission() {
   return new Promise(function(resolve, reject) {
@@ -357,7 +358,11 @@ function requestPermission() {
   });
 }
 
-
+function foo() {
+  LogOut();
+  // location.search('id','');
+  window.location.reload();
+}
 
 
 
@@ -367,9 +372,13 @@ function createNotification(){
 
 
 
-function moveToView(doc_ID){
+function moveToView(){
   // localStorage.setItem( 'id', doc_ID);
-  window.document.location ='inner-page.html'+ '?id='+doc_ID;
+ 
+  const myID = document.getElementById("storyID").innerHTML;
+   window.document.location ='inner-page.html'+ '?id='+myID;
+  alert(myIDs)
+   location.search('id',null);
 }
 
 
@@ -393,7 +402,7 @@ db.collection("Stories").where("category", "==", category)
             title = doc.data().title;
             story = doc.data().story;
             imageURi = doc.data().image;
-                 child_photo += "<article  onclick='moveToView(Doc_ID)'  class='entry' data-aos='fade-up'>";
+                 child_photo += "<article  onclick='moveToView()'  class='entry' data-aos='fade-up'>";
 
                   child_photo +="<div class='entry-img'><img id='userphoto' src='";
                   child_photo += doc.data().image;
@@ -401,11 +410,13 @@ db.collection("Stories").where("category", "==", category)
 
                   child_photo +="<h2 class='entry-title'>"+doc.data().title+"</h2>";
 
-                  // child_photo +="<div><ul>"+doc.data().Country+"</ul>";
-                  // child_photo +="</div>";
-
-                  child_photo +="<div class='entry-content'>";
+                  child_photo +="<div id='Readmore'><a ><span id='storyID'>"+doc.data().doc_ID+"</span></a>";
                   child_photo +="</div>";
+
+                  child_photo +="<div>";
+                  child_photo +="</div>";
+
+                  child_photo +="<a onclick=''></a>"
 
                   child_photo+= "</article>";
                   photolist.push(list_div.innerHTML = child_photo);

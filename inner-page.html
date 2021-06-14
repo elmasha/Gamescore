@@ -70,14 +70,14 @@
       <br>
       <div class="container ">
         <div class="col-md-9">
-          <img width="90%" height="500vh" id="StoryImage" src="" alt="">
+          <img width="90%" height="450vh" id="StoryImage" src="" alt="">
           <br>
           <br>
           <div class="col-md-12">
             <div  class="col-md-12 container-fluid container-xl d-flex container col-md-12  text-center">
               <span id="showUS" onclick="LikeCount()" ><i id="likes"  class="ri-heart-fill"></i></span>
               <span id="showUS"  ><i id="comments" class="ri-message-2-fill"></i></span>
-              <span id="showUS" ><i   class="ri-share-fill"></i> Share</span>
+              <span id="showUS" ><i  id="share"class="ri-share-fill"></i> Share</span>
               <span id="showUS" ></span>
               
             </div>
@@ -97,7 +97,7 @@
             <div>
               <form action="" method="POST">
                 <div class="col-md-12 container-fluid container-xl d-flex container col-md-12  text-center">
-                  <textarea class="form-control"  placeholder="Write a comment...." rows="1" id="comment"></textarea><button onclick="SaveComment()"  type="button"><i class="ri-send-plane-2-fill"></i></button>
+                  <textarea class="form-control"  placeholder="Write a comment...." rows="1" required id="comment"></textarea><button onclick="SaveComment()"  type="button"><i class="ri-send-plane-2-fill"></i></button>
                 </div>
 
               </form>
@@ -218,7 +218,7 @@
 var db = firebase.firestore();
 var Doc_id ="";
 let _comment;
-let _like;  
+let _like;
 
 
 
@@ -229,6 +229,27 @@ viewStoryComment(Doc_id);
 function ClearStorage (){
  //clean the localstorage
   localStorage.setItem( 'id', 0);
+}
+
+
+function share(){
+  const shareData = {
+  title: "title",
+  text: 'Learn web development on MDN!',
+  url: 'https://gamescores.co.ke',
+}
+
+const btn = document.querySelector('share').innerHTML;
+
+// Must be triggered some kind of "user activation"
+btn.addEventListener('click', async () => {
+  try {
+    await navigator.share(shareData)
+    resultPara.textContent = 'MDN shared successfully'
+  } catch(err) {
+    resultPara.textContent = 'Error: ' + err
+  }
+});
 }
 
 

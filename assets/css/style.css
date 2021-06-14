@@ -471,7 +471,19 @@ section {
   background-size:contain;
   overflow: hidden;
 }
+#storyID{
+  display: none;
+}
 
+#Readmore{
+  color: #F19124;
+  font-weight: 200;
+}
+
+#Readmore:hover{
+  color: #08da4e;
+  font-weight: 200;
+}
 #showUS{
   color: #f68c09;
   font-size: 18px;
